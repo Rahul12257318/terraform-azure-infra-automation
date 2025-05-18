@@ -4,12 +4,11 @@ This repository contains a complete Infrastructure-as-Code (IaC) project that pr
 
 ## 🚀 What This Project Includes
 
-✅ Terraform Modules to create:
+### ✅ Terraform Modules to create:
 o	Azure Resource Group
 o	Virtual Network and Subnets
 o	Network Security Groups
 o	Linux Virtual Machines
-
-•	✅ GitHub Actions CI/CD pipeline to:
+### ✅ GitHub Actions CI/CD pipeline to:
 o	Validate and plan infrastructure changes
 o	Deploy infrastructure to Azure on commit
