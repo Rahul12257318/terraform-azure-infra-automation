@@ -1,4 +1,4 @@
-name: Terraform CI
+name: Terraform Format, Init, Validate, Plan
 
 on:
   push:
@@ -20,10 +20,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.6.6
+          terraform_version: 1.4.6
 
       - name: Terraform Init
         run: terraform init
@@ -35,4 +35,14 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -input=false -var-file="terraform.tfvars"
+        run: |
+          terraform plan \
+            -input=false \
+            -var="client_id=${ARM_CLIENT_ID}" \
+            -var="client_secret=${ARM_CLIENT_SECRET}" \
+            -var="tenant_id=${ARM_TENANT_ID}" \
+            -var="subscription_id=${ARM_SUBSCRIPTION_ID}" \
+            -var="location=eastus" \
+            -var="resource_group_name=demo-rg1" \
+            -var="vnet_name=demo-vnet" \
+            -var='vnet_address_space=["10.0.0.0/16"]'
